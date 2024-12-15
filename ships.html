@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ship or Dip</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        header {
+            background-color: #2C3E50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #34495E;
+            padding: 1rem 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+        }
+        nav a:hover {
+            background-color: #1ABC9C;
+        }
+        .content {
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+        .content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        .ships {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 2rem;
+        }
+        .ship {
+            padding: 1.5rem;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            transition: transform 0.3s ease;
+        }
+        .ship img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .ship button {
+            margin-top: 10px;
+            padding: 0.5rem 1rem;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .ship button:hover {
+            background-color: #2980b9;
+        }
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #34495E;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Ship or Dip</h1>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="games.html">Games</a>
+    <a href="hottest.html">Hottest Students</a>
+</nav>
+
+<div class="content">
+    <h2>Vote on These Ships</h2>
+
+    <div class="ships">
+        <div class="ship" id="ship1">
+            <img src="boy1_girl1.jpg" alt="Ship 1">
+            <p>Ship 1: Alex & Sarah</p>
+            <button onclick="voteShip('ship1')">Ship</button>
+            <button onclick="dipShip('ship1')">Dip</button>
+        </div>
+        <div class="ship" id="ship2">
+            <img src="boy2_girl2.jpg" alt="Ship 2">
+            <p>Ship 2: James & Emma</p>
+            <button onclick="voteShip('ship2')">Ship</button>
+            <button onclick="dipShip('ship2')">Dip</button>
+        </div>
+        <div class="ship" id="ship3">
+            <img src="boy3_girl3.jpg" alt="Ship 3">
+            <p>Ship 3: Ethan & Mia</p>
+            <button onclick="voteShip('ship3')">Ship</button>
+            <button onclick="dipShip('ship3')">Dip</button>
+        </div>
+    </div>
+
+    <p id="voteStatus">You can vote 3 times a day, but not on the same ship twice!</p>
+</div>
+
+<footer>
+    <p>&copy; 2024 Draper Park Middle School Community</p>
+</footer>
+
+<script>
+    let votes = JSON.parse(localStorage.getItem("shipVotes")) || { "ship1": 0, "ship2": 0, "ship3": 0 };
+    let votedToday = JSON.parse(localStorage.getItem("votedToday")) || [];
+
+    function updateVoteStatus() {
+        const voteCount = votedToday.length;
+        if (voteCount >= 3) {
+            document.getElementById("voteStatus").textContent = "You have voted 3 times today!";
+            document.querySelectorAll('button').forEach(button => button.disabled = true);
+        } else {
+            document.getElementById("voteStatus").textContent = `You can vote ${3 - voteCount} more time(s) today.`;
+        }
+    }
+
+    function voteShip(shipId) {
+        if (votedToday.includes(shipId)) {
+            alert("You have already voted for this ship today!");
+            return;
+        }
+        if (votedToday.length >= 3) {
+            alert("You can only vote 3 times per day!");
+            return;
+        }
+        votes[shipId]++;
+        votedToday.push(shipId);
+        localStorage.setItem("shipVotes", JSON.stringify(votes));
+        localStorage.setItem("votedToday", JSON.stringify(votedToday));
+        alert(`You voted for ${shipId} as a ship!`);
+        updateVoteStatus();
+    }
+
+    function dipShip(shipId) {
+        if (votedToday.includes(shipId)) {
+            alert("You have already voted for this ship today!");
+            return;
+        }
+        if (votedToday.length >= 3) {
+            alert("You can only vote 3 times per day!");
+            return;
+        }
+        votes[shipId]--;
+        votedToday.push(shipId);
+        localStorage.setItem("shipVotes", JSON.stringify(votes));
+        localStorage.setItem("votedToday", JSON.stringify(votedToday));
+        alert(`You voted to dip ${shipId}.`);
+        updateVoteStatus();
+    }
+
+    // Initial load
+    updateVoteStatus();
+</script>
+</body>
+</html>

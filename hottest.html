@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hottest Students - Draper Park Middle School</title>
+    <title>Hottest Students</title>
     <style>
+        /* Similar Styles */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -15,170 +16,229 @@
         header {
             background-color: #2C3E50;
             color: white;
-            padding: 1rem 0;
+            padding: 2rem 0;
             text-align: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         nav {
             display: flex;
             justify-content: space-around;
             background-color: #34495E;
-            padding: 0.7rem 0;
+            padding: 1rem 0;
         }
         nav a {
             color: white;
             text-decoration: none;
-            padding: 0.7rem 1.2rem;
-            font-weight: bold;
-            transition: background-color 0.3s;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
         }
         nav a:hover {
             background-color: #1ABC9C;
         }
         .content {
-            padding: 3rem;
+            padding: 3rem 1.5rem;
             text-align: center;
         }
-        .students-list {
+        .hottest-container, .ships-container {
+            margin-top: 2rem;
+        }
+        .suggestions {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        input, button {
+            padding: 0.8rem;
+            margin: 10px 0;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+        .ships {
             display: flex;
             justify-content: space-around;
-            margin-top: 3rem;
+            margin-bottom: 2rem;
         }
-        .student {
+        .ship {
+            padding: 1.5rem;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
             text-align: center;
-            position: relative;
-            margin: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 200px;
         }
-        .student img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            border: 4px solid #4CAF50;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        .ship img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
         }
-        .student h3 {
-            font-size: 1.2rem;
-            margin: 1rem 0;
-            color: #2C3E50;
-        }
-        .vote-buttons {
-            margin-top: 1rem;
-        }
-        .vote-buttons button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 0.6rem 1.2rem;
+        .ship button {
+            margin-top: 10px;
+            padding: 0.5rem 1rem;
             border: none;
-            border-radius: 8px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
         }
-        .vote-buttons button:hover {
-            background-color: #45a049;
-        }
-        .results {
-            margin-top: 3rem;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #34495E;
+        .ship button:hover {
+            background-color: #2980b9;
         }
         footer {
             text-align: center;
-            padding: 1rem;
+            padding: 1.5rem;
             background-color: #34495E;
             color: white;
             position: fixed;
             bottom: 0;
             width: 100%;
         }
-        .vote-message {
-            font-size: 1.5rem;
-            color: #E74C3C;
-        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Draper Park Middle School Community</h1>
-    </header>
-    <nav>
-        <a href="drama.html">Drama Page</a>
-        <a href="ships.html">Ship or Dip</a>
-        <a href="games.html">Game Websites</a>
-        <a href="hottest.html">Hottest Students</a>
-    </nav>
-    <div class="content">
-        <h2>Vote for the Hottest Students</h2>
-        <div class="students-list">
-            <div class="student" id="hottest-boy">
-                <h3>Hottest Boy</h3>
-                <img src="boy.jpg" alt="Hottest Boy">
-                <div class="vote-buttons">
-                    <button id="boy-vote" onclick="vote('boy')">Vote for this boy</button>
-                </div>
-            </div>
-            <div class="student" id="hottest-girl">
-                <h3>Hottest Girl</h3>
-                <img src="girl.jpg" alt="Hottest Girl">
-                <div class="vote-buttons">
-                    <button id="girl-vote" onclick="vote('girl')">Vote for this girl</button>
-                </div>
-            </div>
-        </div>
-        <div class="results">
-            <p>Hottest Boy: <span id="boy-votes">0</span> votes</p>
-            <p>Hottest Girl: <span id="girl-votes">0</span> votes</p>
-        </div>
-        <div id="vote-message" class="vote-message"></div>
+
+<header>
+    <h1>Hottest Students & Ship or Dip</h1>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="games.html">Games</a>
+</nav>
+
+<div class="content">
+
+    <!-- Suggestion Section for Hottest Students -->
+    <div class="suggestions">
+        <h3>Suggest a Boy or Girl for Hottest Student</h3>
+        <p>Submit your suggestions for the hottest student! You can suggest one person per day.</p>
+        <input type="text" id="studentName" placeholder="Enter name">
+        <button onclick="submitSuggestion()">Submit Suggestion</button>
     </div>
-    <footer>
-        <p>&copy; 2024 Draper Park Middle School Community</p>
-    </footer>
 
-    <script>
-        // Initialize or load existing votes from localStorage
-        let boyVotes = localStorage.getItem('boyVotes') ? parseInt(localStorage.getItem('boyVotes')) : 0;
-        let girlVotes = localStorage.getItem('girlVotes') ? parseInt(localStorage.getItem('girlVotes')) : 0;
+    <!-- Vote for Ships Section -->
+    <div class="ships-container">
+        <h3>Vote on These Ships</h3>
+        <div class="ships">
+            <div class="ship" id="ship1">
+                <img src="boy1_girl1.jpg" alt="Ship 1">
+                <p>Ship 1: Alex & Sarah</p>
+                <button onclick="voteShip('ship1')">Ship</button>
+                <button onclick="dipShip('ship1')">Dip</button>
+            </div>
+            <div class="ship" id="ship2">
+                <img src="boy2_girl2.jpg" alt="Ship 2">
+                <p>Ship 2: James & Emma</p>
+                <button onclick="voteShip('ship2')">Ship</button>
+                <button onclick="dipShip('ship2')">Dip</button>
+            </div>
+            <div class="ship" id="ship3">
+                <img src="boy3_girl3.jpg" alt="Ship 3">
+                <p>Ship 3: Ethan & Mia</p>
+                <button onclick="voteShip('ship3')">Ship</button>
+                <button onclick="dipShip('ship3')">Dip</button>
+            </div>
+        </div>
+        <p id="voteStatus">You can vote 3 times a day, but not on the same ship twice!</p>
+    </div>
 
-        // Check if the user has voted today
-        let lastVotedDate = localStorage.getItem('lastVotedDate');
-        let currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
-        if (lastVotedDate === currentDate) {
-            document.getElementById('boy-vote').disabled = true;
-            document.getElementById('girl-vote').disabled = true;
-            document.getElementById('vote-message').textContent = "You've already voted today!";
+    <!-- Hottest Students List -->
+    <div class="hottest-container">
+        <h3>Hottest Students List</h3>
+        <p>Current hottest students (most voted).</p>
+        <ul id="hottestList">
+            <!-- Dynamically filled with suggestions -->
+        </ul>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2024 Draper Park Middle School Community</p>
+</footer>
+
+<script>
+    let suggestions = JSON.parse(localStorage.getItem("suggestions")) || [];
+    let votedToday = JSON.parse(localStorage.getItem("votedToday")) || [];
+    let votes = JSON.parse(localStorage.getItem("shipVotes")) || { "ship1": 0, "ship2": 0, "ship3": 0 };
+
+    function updateHottestList() {
+        const hottestList = document.getElementById("hottestList");
+        hottestList.innerHTML = "";
+        suggestions.forEach(suggestion => {
+            const li = document.createElement("li");
+            li.textContent = suggestion;
+            hottestList.appendChild(li);
+        });
+    }
+
+    function submitSuggestion() {
+        const name = document.getElementById("studentName").value.trim();
+        if (!name) {
+            alert("Please enter a name!");
+            return;
         }
-
-        // Update the displayed vote counts
-        document.getElementById('boy-votes').textContent = boyVotes;
-        document.getElementById('girl-votes').textContent = girlVotes;
-
-        // Handle voting
-        function vote(candidate) {
-            if (lastVotedDate === currentDate) return;
-
-            if (candidate === 'boy') {
-                boyVotes++;
-                localStorage.setItem('boyVotes', boyVotes);
-            } else if (candidate === 'girl') {
-                girlVotes++;
-                localStorage.setItem('girlVotes', girlVotes);
-            }
-
-            // Update the vote counts on the page
-            document.getElementById('boy-votes').textContent = boyVotes;
-            document.getElementById('girl-votes').textContent = girlVotes;
-
-            // Store the date of voting to prevent multiple votes in a day
-            localStorage.setItem('lastVotedDate', currentDate);
-
-            // Disable voting buttons after vote
-            document.getElementById('boy-vote').disabled = true;
-            document.getElementById('girl-vote').disabled = true;
-            document.getElementById('vote-message').textContent = "Thank you for voting! You can vote again tomorrow.";
+        if (votedToday.includes(name)) {
+            alert("You've already suggested someone today!");
+            return;
         }
-    </script>
+        suggestions.push(name);
+        votedToday.push(name);
+        localStorage.setItem("suggestions", JSON.stringify(suggestions));
+        localStorage.setItem("votedToday", JSON.stringify(votedToday));
+        alert(`Thank you for suggesting ${name}!`);
+        updateHottestList();
+    }
+
+    function updateVoteStatus() {
+        const voteCount = votedToday.length;
+        if (voteCount >= 3) {
+            document.getElementById("voteStatus").textContent = "You have voted 3 times today!";
+            document.querySelectorAll('button').forEach(button => button.disabled = true);
+        } else {
+            document.getElementById("voteStatus").textContent = `You can vote ${3 - voteCount} more time(s) today.`;
+        }
+    }
+
+    function voteShip(shipId) {
+        if (votedToday.includes(shipId)) {
+            alert("You have already voted for this ship today!");
+            return;
+        }
+        if (votedToday.length >= 3) {
+            alert("You can only vote 3 times per day!");
+            return;
+        }
+        votes[shipId]++;
+        votedToday.push(shipId);
+        localStorage.setItem("shipVotes", JSON.stringify(votes));
+        localStorage.setItem("votedToday", JSON.stringify(votedToday));
+        alert(`You voted for ${shipId} as a ship!`);
+        updateVoteStatus();
+    }
+
+    function dipShip(shipId) {
+        if (votedToday.includes(shipId)) {
+            alert("You have already voted for this ship today!");
+            return;
+        }
+        if (votedToday.length >= 3) {
+            alert("You can only vote 3 times per day!");
+            return;
+        }
+        votes[shipId]--;
+        votedToday.push(shipId);
+        localStorage.setItem("shipVotes", JSON.stringify(votes));
+        localStorage.setItem("votedToday", JSON.stringify(votedToday));
+        alert(`You voted to dip ${shipId}.`);
+        updateVoteStatus();
+    }
+
+    // Initial Load
+    updateHottestList();
+    updateVoteStatus();
+</script>
+
 </body>
 </html>
