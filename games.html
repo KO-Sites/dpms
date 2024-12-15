@@ -1,72 +1,100 @@
-/* Reset some default browser styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Overall body styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #e9f7e1; /* Light green background */
-    color: #2c6b1f; /* Dark green text */
-    line-height: 1.6;
-}
-
-/* Header styles */
-header {
-    background-color: #3a8b3b; /* Dark green header */
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-header h1 {
-    font-size: 3rem;
-}
-
-header p {
-    font-size: 1.2rem;
-}
-
-/* Main content area */
-main {
-    padding: 20px;
-}
-
-/* Game website sections */
-.game-website {
-    background-color: #d6f4d7; /* Light green background for each section */
-    margin: 20px 0;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.game-website h2 {
-    color: #3a8b3b;
-}
-
-.game-website p {
-    font-size: 1.1rem;
-    margin: 10px 0;
-}
-
-.game-website a {
-    color: #3a8b3b;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.game-website a:hover {
-    text-decoration: underline;
-}
-
-/* Footer styles */
-footer {
-    background-color: #3a8b3b;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    margin-top: 20px;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Websites - Draper Park Middle School</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #333;
+            padding: 0.5rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+        nav a:hover {
+            background-color: #4CAF50;
+            border-radius: 5px;
+        }
+        .content {
+            padding: 1rem;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .game-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        .game-item {
+            margin: 1rem;
+            text-align: center;
+        }
+        .game-item a {
+            font-size: 1.2rem;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .game-item a:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Draper Park Middle School Community</h1>
+    </header>
+    <nav>
+        <a href="drama.html">Drama Page</a>
+        <a href="ships.html">Ship or Dip</a>
+        <a href="games.html">Game Websites</a>
+        <a href="hottest.html">Hottest Students</a>
+    </nav>
+    <div class="content">
+        <h2>Popular Game Websites</h2>
+        <div class="game-list">
+            <div class="game-item">
+                <h3><a href="https://strongdogxp.github.io" target="_blank">Strongdogxp's Games</a></h3>
+                <p>Explore the fun games created by Strongdogxp!</p>
+            </div>
+            <div class="game-item">
+                <h3><a href="https://www.hoodamath.com" target="_blank">Hooda Math</a></h3>
+                <p>Enjoy a variety of math-based games on Hooda Math!</p>
+            </div>
+            <div class="game-item">
+                <h3><a href="https://kosites.github.io" target="_blank">Ko Sites Games</a></h3>
+                <p>Play exciting games on the Ko Sites platform!</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Draper Park Middle School Community</p>
+    </footer>
+</body>
+</html>
