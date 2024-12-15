@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hottest Students - Draper Park Middle School</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #333;
+            padding: 0.5rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+        nav a:hover {
+            background-color: #4CAF50;
+            border-radius: 5px;
+        }
+        .content {
+            padding: 1rem;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .students-list {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+        }
+        .student {
+            text-align: center;
+            margin: 1rem;
+        }
+        .student img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+        .vote-buttons {
+            margin-top: 1rem;
+        }
+        .vote-buttons button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .vote-buttons button:hover {
+            background-color: #45a049;
+        }
+        .results {
+            margin-top: 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Draper Park Middle School Community</h1>
+    </header>
+    <nav>
+        <a href="drama.html">Drama Page</a>
+        <a href="ships.html">Ship or Dip</a>
+        <a href="games.html">Game Websites</a>
+        <a href="hottest.html">Hottest Students</a>
+    </nav>
+    <div class="content">
+        <h2>Vote for the Hottest Students</h2>
+        <div class="students-list">
+            <!-- Hottest Boy -->
+            <div class="student" id="hottest-boy">
+                <h3>Hottest Boy</h3>
+                <img src="boy.jpg" alt="Hottest Boy">
+                <div class="vote-buttons">
+                    <button onclick="vote('boy')">Vote for this boy</button>
+                </div>
+            </div>
+            <!-- Hottest Girl -->
+            <div class="student" id="hottest-girl">
+                <h3>Hottest Girl</h3>
+                <img src="girl.jpg" alt="Hottest Girl">
+                <div class="vote-buttons">
+                    <button onclick="vote('girl')">Vote for this girl</button>
+                </div>
+            </div>
+        </div>
+        <div class="results">
+            <h3>Current Votes</h3>
+            <p>Hottest Boy: <span id="boy-votes">0</span> votes</p>
+            <p>Hottest Girl: <span id="girl-votes">0</span> votes</p>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Draper Park Middle School Community</p>
+    </footer>
+
+    <script>
+        // Load votes from localStorage or initialize with 0
+        let boyVotes = localStorage.getItem('boyVotes') ? parseInt(localStorage.getItem('boyVotes')) : 0;
+        let girlVotes = localStorage.getItem('girlVotes') ? parseInt(localStorage.getItem('girlVotes')) : 0;
+
+        // Update vote count on page load
+        document.getElementById('boy-votes').textContent = boyVotes;
+        document.getElementById('girl-votes').textContent = girlVotes;
+
+        // Function to handle voting
+        function vote(candidate) {
+            if (candidate === 'boy') {
+                boyVotes++;
+                localStorage.setItem('boyVotes', boyVotes);
+            } else if (candidate === 'girl') {
+                girlVotes++;
+                localStorage.setItem('girlVotes', girlVotes);
+            }
+            updateVoteDisplay();
+        }
+
+        // Update the vote display
+        function updateVoteDisplay() {
+            document.getElementById('boy-votes').textContent = boyVotes;
+            document.getElementById('girl-votes').textContent = girlVotes;
+        }
+    </script>
+</body>
+</html>
