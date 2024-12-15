@@ -6,59 +6,61 @@
     <title>Hottest Students - Draper Park Middle School</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            background-color: #f4f7f6;
             color: #333;
         }
         header {
-            background-color: #4CAF50;
+            background-color: #2C3E50;
             color: white;
-            padding: 1rem;
+            padding: 1rem 0;
             text-align: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         nav {
             display: flex;
             justify-content: space-around;
-            background-color: #333;
-            padding: 0.5rem;
+            background-color: #34495E;
+            padding: 0.7rem 0;
         }
         nav a {
             color: white;
             text-decoration: none;
-            padding: 0.5rem 1rem;
+            padding: 0.7rem 1.2rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
         }
         nav a:hover {
-            background-color: #4CAF50;
-            border-radius: 5px;
+            background-color: #1ABC9C;
         }
         .content {
-            padding: 1rem;
+            padding: 3rem;
             text-align: center;
-        }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: #333;
-            color: white;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
         }
         .students-list {
             display: flex;
             justify-content: space-around;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
         .student {
             text-align: center;
-            margin: 1rem;
+            position: relative;
+            margin: 1.5rem;
         }
         .student img {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
+            border: 4px solid #4CAF50;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        .student h3 {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            color: #2C3E50;
         }
         .vote-buttons {
             margin-top: 1rem;
@@ -66,17 +68,34 @@
         .vote-buttons button {
             background-color: #4CAF50;
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
         }
         .vote-buttons button:hover {
             background-color: #45a049;
         }
         .results {
-            margin-top: 2rem;
+            margin-top: 3rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #34495E;
+        }
+        footer {
             text-align: center;
+            padding: 1rem;
+            background-color: #34495E;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .vote-message {
+            font-size: 1.5rem;
+            color: #E74C3C;
         }
     </style>
 </head>
@@ -93,44 +112,53 @@
     <div class="content">
         <h2>Vote for the Hottest Students</h2>
         <div class="students-list">
-            <!-- Hottest Boy -->
             <div class="student" id="hottest-boy">
                 <h3>Hottest Boy</h3>
                 <img src="boy.jpg" alt="Hottest Boy">
                 <div class="vote-buttons">
-                    <button onclick="vote('boy')">Vote for this boy</button>
+                    <button id="boy-vote" onclick="vote('boy')">Vote for this boy</button>
                 </div>
             </div>
-            <!-- Hottest Girl -->
             <div class="student" id="hottest-girl">
                 <h3>Hottest Girl</h3>
                 <img src="girl.jpg" alt="Hottest Girl">
                 <div class="vote-buttons">
-                    <button onclick="vote('girl')">Vote for this girl</button>
+                    <button id="girl-vote" onclick="vote('girl')">Vote for this girl</button>
                 </div>
             </div>
         </div>
         <div class="results">
-            <h3>Current Votes</h3>
             <p>Hottest Boy: <span id="boy-votes">0</span> votes</p>
             <p>Hottest Girl: <span id="girl-votes">0</span> votes</p>
         </div>
+        <div id="vote-message" class="vote-message"></div>
     </div>
     <footer>
         <p>&copy; 2024 Draper Park Middle School Community</p>
     </footer>
 
     <script>
-        // Load votes from localStorage or initialize with 0
+        // Initialize or load existing votes from localStorage
         let boyVotes = localStorage.getItem('boyVotes') ? parseInt(localStorage.getItem('boyVotes')) : 0;
         let girlVotes = localStorage.getItem('girlVotes') ? parseInt(localStorage.getItem('girlVotes')) : 0;
 
-        // Update vote count on page load
+        // Check if the user has voted today
+        let lastVotedDate = localStorage.getItem('lastVotedDate');
+        let currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+        if (lastVotedDate === currentDate) {
+            document.getElementById('boy-vote').disabled = true;
+            document.getElementById('girl-vote').disabled = true;
+            document.getElementById('vote-message').textContent = "You've already voted today!";
+        }
+
+        // Update the displayed vote counts
         document.getElementById('boy-votes').textContent = boyVotes;
         document.getElementById('girl-votes').textContent = girlVotes;
 
-        // Function to handle voting
+        // Handle voting
         function vote(candidate) {
+            if (lastVotedDate === currentDate) return;
+
             if (candidate === 'boy') {
                 boyVotes++;
                 localStorage.setItem('boyVotes', boyVotes);
@@ -138,13 +166,18 @@
                 girlVotes++;
                 localStorage.setItem('girlVotes', girlVotes);
             }
-            updateVoteDisplay();
-        }
 
-        // Update the vote display
-        function updateVoteDisplay() {
+            // Update the vote counts on the page
             document.getElementById('boy-votes').textContent = boyVotes;
             document.getElementById('girl-votes').textContent = girlVotes;
+
+            // Store the date of voting to prevent multiple votes in a day
+            localStorage.setItem('lastVotedDate', currentDate);
+
+            // Disable voting buttons after vote
+            document.getElementById('boy-vote').disabled = true;
+            document.getElementById('girl-vote').disabled = true;
+            document.getElementById('vote-message').textContent = "Thank you for voting! You can vote again tomorrow.";
         }
     </script>
 </body>

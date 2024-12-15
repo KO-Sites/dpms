@@ -6,63 +6,81 @@
     <title>Game Websites - Draper Park Middle School</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            background-color: #f4f7f6;
             color: #333;
         }
         header {
-            background-color: #4CAF50;
+            background-color: #2C3E50;
             color: white;
-            padding: 1rem;
+            padding: 1rem 0;
             text-align: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         nav {
             display: flex;
             justify-content: space-around;
-            background-color: #333;
-            padding: 0.5rem;
+            background-color: #34495E;
+            padding: 0.7rem 0;
         }
         nav a {
             color: white;
             text-decoration: none;
-            padding: 0.5rem 1rem;
+            padding: 0.7rem 1.2rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
         }
         nav a:hover {
-            background-color: #4CAF50;
-            border-radius: 5px;
+            background-color: #1ABC9C;
         }
         .content {
+            padding: 3rem;
+            text-align: center;
+        }
+        .game-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .game-item {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .game-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .game-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .game-item h3 {
             padding: 1rem;
+            font-size: 1.2rem;
+            background-color: #2C3E50;
+            color: white;
+        }
+        .game-item p {
+            padding: 1rem;
+            font-size: 1rem;
+            color: #34495E;
         }
         footer {
             text-align: center;
             padding: 1rem;
-            background-color: #333;
+            background-color: #34495E;
             color: white;
             position: fixed;
             bottom: 0;
             width: 100%;
-        }
-        .game-list {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 2rem;
-        }
-        .game-item {
-            margin: 1rem;
-            text-align: center;
-        }
-        .game-item a {
-            font-size: 1.2rem;
-            color: #4CAF50;
-            text-decoration: none;
-        }
-        .game-item a:hover {
-            color: #333;
-            text-decoration: underline;
         }
     </style>
 </head>
@@ -80,14 +98,17 @@
         <h2>Popular Game Websites</h2>
         <div class="game-list">
             <div class="game-item">
+                <img src="strongdogxp-thumbnail.jpg" alt="Strongdogxp Games">
                 <h3><a href="https://strongdogxp.github.io" target="_blank">Strongdogxp's Games</a></h3>
                 <p>Explore the fun games created by Strongdogxp!</p>
             </div>
             <div class="game-item">
+                <img src="hoodamath-thumbnail.jpg" alt="Hooda Math">
                 <h3><a href="https://www.hoodamath.com" target="_blank">Hooda Math</a></h3>
                 <p>Enjoy a variety of math-based games on Hooda Math!</p>
             </div>
             <div class="game-item">
+                <img src="kosites-thumbnail.jpg" alt="Ko Sites Games">
                 <h3><a href="https://kosites.github.io" target="_blank">Ko Sites Games</a></h3>
                 <p>Play exciting games on the Ko Sites platform!</p>
             </div>
